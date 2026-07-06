@@ -1,0 +1,34 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Bloglar{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <span class="eyebrow">Bloglar</span>
+        <h1 class="hero-title">Sizning hikoyalaringiz, chiroyli sahifada.</h1>
+        <p class="hero-copy">Har bir post uchun zamonaviy, toza va professional ko‘rinish. Linklar va sahifalar hamma joyda bir xil chiroyli stylingga ega.</p>
+    </section>
+
+    <section class="card-grid">
+        {% for blog in blogs %}
+            <article class="card">
+                <div style="display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; flex-wrap:wrap;">
+                    <div>
+                        <h2>{{ blog.title }}</h2>
+                        <p class="muted">{{ blog.shortdesc }}</p>
+                    </div>
+                    <span class="meta">{{ blog.created_at }}</span>
+                </div>
+
+                <div class="actions">
+                    <a href="{% url 'blog' blog.id %}" class="button">Batafsil ko'rish</a>
+                </div>
+            </article>
+        {% empty %}
+            <article class="card">
+                <h2>Hozircha bloglar mavjud emas</h2>
+                <p class="muted">Yangi post qo‘shish uchun admin paneldan foydalaning yoki funksiya qo‘shing.</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}

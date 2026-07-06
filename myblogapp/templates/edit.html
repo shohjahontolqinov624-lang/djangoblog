@@ -1,0 +1,30 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Tahrirlash — {{ blog.title }}{% endblock %}
+
+{% block content %}
+    <article class="card">
+        <p class="eyebrow">Maqolani tahrirlash</p>
+        <h1>Tahrirlash</h1>
+        <p class="muted" style="margin:0.8rem 0 1.6rem;">Kiritilgan matnni tekshiring va kerakli o‘zgartirishlarni saqlang.</p>
+        <form action="{% url 'editblog' blog.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-field">
+                <label for="title">Nomi</label>
+                <input id="title" type="text" name="title" value="{{ blog.title }}">
+            </div>
+            <div class="form-field">
+                <label for="short">Qisqacha</label>
+                <textarea id="short" name="short">{{ blog.shortdesc }}</textarea>
+            </div>
+            <div class="form-field">
+                <label for="long">To'liq</label>
+                <textarea id="long" name="long">{{ blog.longdesc }}</textarea>
+            </div>
+            <div class="actions">
+                <button type="submit" class="primary">Saqlash</button>
+                <a href="{% url 'blog' blog.id %}" class="button-secondary">Bekor qilish</a>
+            </div>
+        </form>
+    </article>
+{% endblock %}
